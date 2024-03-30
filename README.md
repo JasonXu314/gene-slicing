@@ -5,6 +5,6 @@ sudo apt-get install gcc
 ```
 - To compile, run the following command:
 ```
-g++ *.cpp -o <output location>
+g++ main.cpp utils.cpp -o <output location>
 ```
 - For command usage, use the `help` command.

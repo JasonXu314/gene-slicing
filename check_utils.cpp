@@ -7,7 +7,7 @@ std::vector<Segment> readGenomeData(const std::string& fileName) {
 
 	// std::getline(file, _);	// ignore the first (header) line
 	Segment segment;
-	while (file >> segment.chromosome >> segment.start >> segment.end >> segment.name) {
+	while (file >> segment.chromosome >> segment.start >> segment.end >> segment.name >> _) {
 		segments.push_back(segment);
 	}
 

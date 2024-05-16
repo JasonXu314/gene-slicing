@@ -3,7 +3,6 @@
 #include <limits>
 #include <queue>
 
-#include "Segment.h"
 #include "utils.h"
 
 using namespace std;
@@ -23,7 +22,6 @@ int main(int argc, char** argv) {
 		vector<Segment> generatedSegments, candidates;
 
 		Segment genomeSegment;
-		findCandidates(candidates, genomeSegment, complementSegments, padding);
 		unsigned int i = 0;
 		while (!genomeSegments.empty()) {
 			genomeSegment = genomeSegments.top();
@@ -42,7 +40,7 @@ int main(int argc, char** argv) {
 			unsigned int requiredLength = genomeSegment.length(), complementIdx = rand() % candidates.size();
 
 			Segment& complementSegment = candidates[complementIdx];
-			Segment generatedSegment = {"c" + genomeSegment.name, complementSegment.chromosome, complementSegment.start,
+			Segment generatedSegment = {genomeSegment.name + "ctrl", complementSegment.chromosome, complementSegment.start,
 										complementSegment.start + requiredLength};
 			complementSegment.start += requiredLength + padding;
 

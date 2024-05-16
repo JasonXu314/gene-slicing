@@ -1,7 +1,6 @@
 #include <iostream>
 #include <queue>
 
-#include "Segment.h"
 #include "check_utils.h"
 
 using namespace std;

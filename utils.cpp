@@ -1,14 +1,16 @@
 #include "utils.h"
 
+#include <limits>
+
 SegmentQueue readGenomeData(const std::string& fileName) {
 	SegmentQueue segments;
 	std::ifstream file(fileName);
-	std::string _;
 
 	// std::getline(file, _);	// ignore the first (header) line
 	Segment segment;
 	while (file >> segment.chromosome >> segment.start >> segment.end >> segment.name) {
 		segments.emplace(segment);
+		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 
 	file.close();
@@ -19,7 +21,6 @@ SegmentQueue readGenomeData(const std::string& fileName) {
 SegmentQueue readComplementData(const std::string& fileName, unsigned int trim) {
 	SegmentQueue segments;
 	std::ifstream file(fileName);
-	std::string _;
 
 	// std::getline(file, _);	// ignore the first (header) line
 	Segment segment;
@@ -35,6 +36,8 @@ SegmentQueue readComplementData(const std::string& fileName, unsigned int trim) 
 
 			segments.emplace(segment);
 		}
+
+		file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 
 	file.close();
@@ -55,7 +58,14 @@ void writeData(const std::string& fileName, const std::vector<Segment>& segments
 
 std::string generateOutputFileName(const std::string& fileName) {
 	std::string outputFileName = fileName;
-	outputFileName.replace(outputFileName.find(".txt"), 4, "_out.txt");
+	std::size_t idx = outputFileName.find(".txt");
+
+	if (idx != std::string::npos) {
+		outputFileName.replace(idx, 4, "_out.txt");
+	} else {
+		outputFileName += ".out";
+	}
+
 	return outputFileName;
 }
 

@@ -1,2 +1,4 @@
 *.txt
 .vscode/
+*.bed
+*.bed.out
